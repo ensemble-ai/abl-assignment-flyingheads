@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import abl.generated.ChaserAgent;
+import abl.generated.StarterAgent;
 import game.input.*;
 /**
  *  Simple "game" for showing how to interface an ABL agent.
@@ -112,6 +113,7 @@ public class GameEngine extends JPanel implements KeyListener {
 		
 		// spawn an update thread
 		new Thread() {
+			@Override
 			public void run() {
 				while (true) {
 					try {
@@ -130,20 +132,23 @@ public class GameEngine extends JPanel implements KeyListener {
 	 * Note: this method does not return, the ABL agent decision cycle claims the thread.
 	 */
 	public void startAgent() {
-		 ChaserAgent agent = new ChaserAgent();
-		 agent.startBehaving();
+		 //ChaserAgent agent = new ChaserAgent();
+		 //agent.startBehaving();
+		 StarterAgent starterAgent = new StarterAgent();
+		 starterAgent.startBehaving();
 	}
 
 	/**
 	 * Updates the positions of objects, and draws the scene.
 	 */
+	@Override
 	public void paint(Graphics g) {
 		updateLocations();
 		updateBullets();
 	
 		super.paint(g);
 
-		g.setColor(Color.BLUE);
+		g.setColor(Color.GREEN);
 		g.fillRect(playerLocation.x, playerLocation.y, playerSize, playerSize);
 	
 		for (Bot bot : this.bots) {
@@ -320,11 +325,20 @@ public class GameEngine extends JPanel implements KeyListener {
 	 *
 	 * Note: tracks presses and releases with a boolean value to avoid duplicate key presses.
 	 */
+	@Override
 	public void keyPressed(KeyEvent e) {
 		
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && keyPresses[KeyEvent.VK_SPACE] == false) {
 			spawnBullet = true;
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_B && keyPresses[KeyEvent.VK_B] == false) {
+			Bot b = new Bot();
+			b.setLocation(new Point(dimensions.x/2 + 10, dimensions.y/2 + 10));
+			b.setColor(Color.PINK);
+			bots.add(b);
+			
 		}
 
 		if (e.getKeyCode() < keyPresses.length) {
@@ -339,11 +353,13 @@ public class GameEngine extends JPanel implements KeyListener {
 	/**
 	 * Release key state.
 	 */
+	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() < keyPresses.length) {
 			keyPresses[e.getKeyCode()] = false;
 		}
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {}
 }

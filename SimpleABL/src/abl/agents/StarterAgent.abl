@@ -1,0 +1,85 @@
+package abl.generated;
+// the package corresponds to where generated Java files are placed.
+
+import abl.wmes.*;
+import abl.actions.*;
+import abl.sensors.*;
+
+behaving_entity StarterAgent {
+	
+	register act move(int, int, int) with Move;
+	register act setColor(int, int, int) with SetColor;
+	
+	register wme PlayerWME with PlayerSensor;
+    register wme BotWME with BotSensor;
+	
+	/**
+	 * Continuously move towards the player character.
+	 */
+	sequential behavior manageMovement() {
+		mental_act {
+			System.out.println("Inside the manageMovement 00 Function");
+		}
+		with (persistent) subgoal moveTo();
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX < botX)
+			(playerY < botY)
+			
+		}
+		specificity 3;
+ 
+		act move(-1, -1, id);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX > botX)
+			(playerY > botY)
+			
+		}
+		specificity 3;
+ 
+		act move(1, 1, id);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX > botX)
+			(playerY < botY)
+			
+		}
+		specificity 3;
+ 
+		act move(1, -1, id);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX < botX)
+			(playerY > botY)
+			
+		}
+		specificity 3;
+ 
+		act move(-1, 1, id);
+	}
+	
+	initial_tree {
+		with (priority 2) mental_act {
+			System.out.println("The Test agent has started on initial_tree.");
+		}
+		with (priority 1) subgoal manageMovement();
+		
+	}
+}

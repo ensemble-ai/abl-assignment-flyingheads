@@ -23,9 +23,11 @@ public class AgentCompiler {
 
 		if (debugMode) {
 			Abl.main(new String[] { "-g2", "-d", "src", "src/abl/agents/ChaserAgent.abl" });
+			Abl.main(new String[] { "-g2", "-d", "src", "src/abl/agents/StarterAgent.abl" });
 		}
 		else {
 			Abl.main(new String[] { "-d", "src", "src/abl/agents/ChaserAgent.abl" });
+			Abl.main(new String[] { "-d", "src", "src/abl/agents/StarterAgent.abl" });
 		}
 	}
 }

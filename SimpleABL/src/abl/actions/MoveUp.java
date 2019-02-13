@@ -15,6 +15,7 @@ public class MoveUp extends BaseAction {
 	 * Sets the trajectory of the player to move up.
 	 * args[0] - bot id
 	 */
+	@Override
 	public void execute(Object[] args) {
 		for(Bot b:GameEngine.getInstance().getBots()) {
 			if(b.getId() == (Integer)args[0]) {

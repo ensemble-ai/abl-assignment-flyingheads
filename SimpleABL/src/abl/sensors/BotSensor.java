@@ -14,6 +14,7 @@ public class BotSensor extends SerialSensor {
 	/**
 	 * Adds a Bot WME to working memory of the agent and deletes previous chaser WMEs in memory.
 	 */
+	@Override
 	public void sense() {
  
 		BehavingEntity.getBehavingEntity().deleteAllWMEClass("BotWME");

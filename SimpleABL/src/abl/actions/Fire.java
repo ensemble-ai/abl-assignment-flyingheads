@@ -19,7 +19,9 @@ public class Fire extends BaseAction {
 	 *  - 2: target x position
 	 *  - 3: target y position
 	 */
+	@Override
 	public void execute(Object[] args) {
+		System.out.println("Inside the fire Function");
 		GameEngine.getInstance().fireBullet(
 				new Point((Integer)args[0], (Integer)args[1]), 
 				new Point((Integer)args[2], (Integer)args[3]));
