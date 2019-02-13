@@ -12,6 +12,33 @@ behaving_entity StarterAgent {
 	
 	register wme PlayerWME with PlayerSensor;
     register wme BotWME with BotSensor;
+    
+    sequential behavior manageColor() {
+		mental_act {
+			System.out.println("Inside the manageColor 00 Function");
+		}
+		subgoal color();
+	}
+	
+	sequential behavior color() {
+		act setColor(255,255,0);
+	}
+	
+	/**
+     * Utility behavior for suspending the execution of a behavior.
+     *
+     * This behavior consist of two steps. First, the mental act compute the finishing time
+     * based on the input delay. Second, the success tests waits until the condition check
+     * evaluates to true.
+     */
+	sequential behavior Wait(int milliseconds) {
+		long finish;
+	    mental_act { 
+	    	finish = System.currentTimeMillis() + milliseconds; 
+	    }
+	    
+	    with ( success_test { (System.currentTimeMillis() > finish) } ) wait;
+	}
 	
 	/**
 	 * Continuously move towards the player character.
@@ -20,6 +47,7 @@ behaving_entity StarterAgent {
 		mental_act {
 			System.out.println("Inside the manageMovement 00 Function");
 		}
+		//subgoal Wait(2000);
 		with (persistent) subgoal moveTo();
 	}
 	
@@ -76,9 +104,10 @@ behaving_entity StarterAgent {
 	}
 	
 	initial_tree {
-		with (priority 2) mental_act {
+		with (priority 3) mental_act {
 			System.out.println("The Test agent has started on initial_tree.");
 		}
+		with (priority 2) subgoal manageColor();
 		with (priority 1) subgoal manageMovement();
 		
 	}
