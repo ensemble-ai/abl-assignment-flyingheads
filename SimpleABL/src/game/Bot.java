@@ -22,11 +22,14 @@ public class Bot {
 	
 	private int size = Size;
 	
+	private int newb;
+	
 	public Bot() {
 		this.location = new Point(0,0);
 		this.trajectory = new Point(0,0);
 		this.id = IdCount++;
 		this.color = new Color(255, 165, 0);
+		this.newb = 1;
 	}
 
 	public Point getLocation() {
@@ -60,6 +63,10 @@ public class Bot {
 	public int getSize() {
 		return size;
 	}
+	
+	public int getNewb() {
+		return newb;
+	}
 
 	public void setSize(int size) {
 		this.size = size;
@@ -71,5 +78,9 @@ public class Bot {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public void setNewb() {
+		this.newb = 0;
 	}
 }

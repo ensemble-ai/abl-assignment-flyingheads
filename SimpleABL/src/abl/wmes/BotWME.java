@@ -20,13 +20,17 @@ public class BotWME extends WME {
 	/** ID of the bot */
 	private int id;
 	
+	/** True if bot is new **/
+	private int newb;
+	
 	/**
 	 * Instantiates a working memory element for tracking a bot.
 	 */
-	public BotWME(Point location, Point trajectory, int id) {
+	public BotWME(Point location, Point trajectory, int id, int newb) {
 		this.location = location;
 		this.trajectory = trajectory;
 		this.id = id;
+		this.newb = newb;
 	}
 	
 	/**
@@ -63,5 +67,9 @@ public class BotWME extends WME {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getNewb() {
+		return newb;
 	}
 }
