@@ -1,0 +1,154 @@
+package abl.generated;
+// the package corresponds to where generated Java files are placed.
+
+import abl.wmes.*;
+import abl.actions.*;
+import abl.sensors.*;
+// Imports are used the same way as in Java. Its necessary to import Sensor, Action, and WME classes.
+/** 
+ * A simple agent that moves towards the player and occasionally fires bullets.
+ *
+ * @author Josh McCoy 1-23-2019
+ * @author Ben Weber 3-7-11
+ */ 
+behaving_entity ChaserAgent {
+// This defines a name for the agent 
+
+	/** 
+	 * Define the physicals actions that the agent can perform. The definition includes an action prototype and
+	 * and an action class name. The class name must be a Java class which has been imported. 
+	 *
+	 * The prototype parameters correspond to the types expected by the execute(object[]) method 
+	 * in the action's Java class.
+	 */
+	register act moveTo(int, int, int) with MoveTo; 
+	register act stop(int) with Stop;
+	register act fire(int, int, int, int) with Fire;
+	register act isNew(int) with IsNew;
+
+	/**
+	 * Define the sensors that add game state to working memory. Each sensor defines the name of the WME class
+	 * that it is responsible for managing and the Java sensor class that implements the functionality. 
+	 */
+    register wme PlayerWME with PlayerSensor;
+    register wme BotWME with BotSensor;
+
+	sequential behavior manageFormation(int id){
+	subgoal Wait (100);
+		with (persistent) subgoal formation(id);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(BotWME  fBot::fBot id::id) 
+			(fBot == 1)
+			(id == bid)
+		}
+		specificity 1;
+		act stop(id);
+		subgoal Wait(20);
+	}
+
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY)
+			(BotWME locationY::botY formationY::formationY fBot::fBot id::id) 
+			(botY > (playerY + formationY))
+			(fBot == 1)
+			(id == bid)
+		}
+		specificity 3;
+		act moveTo(0,-1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY)
+			(BotWME locationY::botY formationY::formationY fBot::fBot id::id) 
+			(botY < (playerY + formationY))
+			(fBot == 1)
+			(id == bid)
+		}
+		specificity 3;
+		act moveTo(0,1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationX::playerX)
+			(BotWME locationX::botX formationX::formationX fBot::fBot id::id) 
+			(botX < (playerX + formationX))
+			(fBot == 1)
+			(id == bid)
+		}
+		specificity 2;
+		act moveTo(1,0,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationX::playerX)
+			(BotWME locationX::botX formationX::formationX fBot::fBot id::id) 
+			(botX > (playerX + formationX))
+			(fBot == 1)
+			(id == bid)
+		}
+		specificity 2;
+		act moveTo(-1,0,id);
+		subgoal Wait(20);
+	}
+
+	sequential behavior detectNewBots(){
+		subgoal Wait(1000);
+		with (persistent) subgoal newBotGoal();
+	}
+	
+	sequential behavior newBotGoal(){
+		precondition {
+			(BotWME id::id newb::newb)
+			(newb == 1)
+		}
+		subgoal newBotGoals(id);
+		act isNew(id);
+		subgoal Wait(500);
+	}
+	
+	parallel behavior newBotGoals(int id){
+		with (priority 2) spawngoal manageFormation(id);
+		with (priority 4) mental_act {
+			System.out.println("spawned new goals");
+    	}
+	}
+
+	sequential behavior Wait(int milliseconds) {
+		long finish;
+	    mental_act { 
+	    	finish = System.currentTimeMillis() + milliseconds; 
+	    }
+	    
+	    with ( success_test { (System.currentTimeMillis() > finish) } ) wait;
+	}
+ 
+    /** 
+     * Root of the active behavior tree.
+     *
+     * Note: this is a parallel behavior.
+     * Note: the ABL compiler expects this to be the last behavior defined in the agent. 
+     * Note: priorities are used to ensure all goals are pursued, since the move() goal can thrash in this simple example
+     */
+    initial_tree {
+    	with (priority 4) mental_act {
+			System.out.println("Starting bot Agent 3");
+    	}
+    	with (priority 2) subgoal detectNewBots();
+    }
+}
+
+
+	
+
+
+
