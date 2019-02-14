@@ -24,12 +24,17 @@ public class Bot {
 	
 	private int newb;
 	
+	private int fBot;
+	private Point formation;
+	
 	public Bot() {
 		this.location = new Point(0,0);
 		this.trajectory = new Point(0,0);
 		this.id = IdCount++;
 		this.color = new Color(255, 165, 0);
 		this.newb = 1;
+		this.fBot = 0;
+		this.formation = new Point(0,0);
 	}
 
 	public Point getLocation() {
@@ -82,5 +87,21 @@ public class Bot {
 
 	public void setNewb() {
 		this.newb = 0;
+	}
+	
+	public void setfBot() {
+		this.fBot = 1;
+	}
+	
+	public int getfBot() {
+		return fBot; 
+	}
+	
+	public Point getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Point formation) {
+		this.formation = formation;
 	}
 }

@@ -46,10 +46,10 @@ public class GameEngine extends JPanel implements KeyListener {
 	private static final int bulletSize = 4;
 
 	/** speed of the player character */
-	private static final int PlayerSpeed = 4;
+	private static final int PlayerSpeed = 1;
 
 	/** speed of the player character */
-	public static final int BotSpeed = 2;
+	public static final int BotSpeed = 1;
 
 	/** keys held down */
 	private boolean[] keyPresses = new boolean[256];
@@ -65,7 +65,7 @@ public class GameEngine extends JPanel implements KeyListener {
 	
 	/** did the player spawn four formation bots */
 	private boolean spawnFourBots = false;
-	private int fBot_ids[];
+	private boolean spawnedFourBots = false; //makes it so this only happens once at most
 	
 	/** bullets which have been fired by both players */
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
@@ -119,7 +119,7 @@ public class GameEngine extends JPanel implements KeyListener {
 		b.setNewb();
 		bots.add(b);
 		
-		fBot_ids = new int[4];
+		spawnFourBots = true;
 		
 		// spawn an update thread
 		new Thread() {
@@ -230,16 +230,36 @@ public class GameEngine extends JPanel implements KeyListener {
 			b.setLocation(new Point(dimensions.x/2, dimensions.y/2));
 			bots.add(b);
 		}
-		if (spawnFourBots) {
+		if (spawnFourBots && !spawnedFourBots) {
 			spawnFourBots = false;
+			spawnedFourBots = true;
 			
 			//spawn four bots 
-			for(int i=0; i<4; i++) {
-				Bot b = new Bot();
-				b.setLocation(new Point(dimensions.x/2, dimensions.y/2));
-				bots.add(b);
-				fBot_ids[i] = b.getId();
-			}
+			Bot b1 = new Bot();
+			b1.setLocation(new Point(playerLocation.x + 25, playerLocation.y + 25));
+			b1.setfBot();
+			
+			Bot b2 = new Bot();
+			b2.setLocation(new Point(playerLocation.x + 25, playerLocation.y - 25));
+			b2.setfBot();
+			
+			Bot b3 = new Bot();
+			b3.setLocation(new Point(playerLocation.x - 25, playerLocation.y + 25));
+			b3.setfBot();
+			
+			Bot b4 = new Bot();
+			b4.setLocation(new Point(playerLocation.x - 25, playerLocation.y - 25));
+			b4.setfBot();
+			
+			b1.setFormation(new Point(25,25));
+			b2.setFormation(new Point(25,-25));
+			b3.setFormation(new Point(-25,25));
+			b4.setFormation(new Point(-25,-25));
+			
+			bots.add(b1);
+			bots.add(b2);
+			bots.add(b3);
+			bots.add(b4);
 		}
 	}
 	
@@ -370,7 +390,7 @@ public class GameEngine extends JPanel implements KeyListener {
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_F && keyPresses[KeyEvent.VK_F] == false) {
-			spawnFourBots = true;
+			//spawnFourBots = true;
 		}
 		
 		if (e.getKeyCode() < keyPresses.length) {
