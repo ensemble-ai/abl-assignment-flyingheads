@@ -6,7 +6,7 @@ import abl.actions.*;
 import abl.sensors.*;
 // Imports are used the same way as in Java. Its necessary to import Sensor, Action, and WME classes.
 /** 
- * 
+ * A simple agent that moves towards the player and occasionally fires bullets.
  *
  * @author Josh McCoy 1-23-2019
  * @author Ben Weber 3-7-11
@@ -23,14 +23,18 @@ behaving_entity ChaserAgent {
 	 */
 	register act moveTo(int, int, int) with MoveTo; 
 	register act stop(int) with Stop;
+	register act fire(int, int, int, int) with Fire;
+	register act isNew(int) with IsNew;
 
+	/**
+	 * Define the sensors that add game state to working memory. Each sensor defines the name of the WME class
+	 * that it is responsible for managing and the Java sensor class that implements the functionality. 
+	 */
     register wme PlayerWME with PlayerSensor;
     register wme BotWME with BotSensor;
 
-	int botSpeed = 1;	
-
-
 	sequential behavior manageFormation(int id){
+	subgoal Wait (100);
 		with (persistent) subgoal formation(id);
 	}
 	
@@ -96,16 +100,29 @@ behaving_entity ChaserAgent {
 		act moveTo(-1,0,id);
 		subgoal Wait(20);
 	}
+
+	sequential behavior detectNewBots(){
+		subgoal Wait(1000);
+		with (persistent) subgoal newBotGoal();
+	}
 	
+	sequential behavior newBotGoal(){
+		precondition {
+			(BotWME id::id newb::newb)
+			(newb == 1)
+		}
+		subgoal newBotGoals(id);
+		act isNew(id);
+		subgoal Wait(500);
+	}
+	
+	parallel behavior newBotGoals(int id){
+		with (priority 2) spawngoal manageFormation(id);
+		with (priority 4) mental_act {
+			System.out.println("spawned new goals");
+    	}
+	}
 
-
-    /**
-     * Utility behavior for suspending the execution of a behavior.
-     *
-     * This behavior consist of two steps. First, the mental act compute the finishing time
-     * based on the input delay. Second, the success tests waits until the condition check
-     * evaluates to true.
-     */
 	sequential behavior Wait(int milliseconds) {
 		long finish;
 	    mental_act { 
@@ -124,11 +141,14 @@ behaving_entity ChaserAgent {
      */
     initial_tree {
     	with (priority 4) mental_act {
-			System.out.println("Starting bot Agent");
+			System.out.println("Starting bot Agent 3");
     	}
-    	with (priority 3) subgoal manageFormation(1);
-    	with (priority 3) subgoal manageFormation(2);
-    	with (priority 3) subgoal manageFormation(3);
-    	with (priority 3) subgoal manageFormation(4);
+    	with (priority 2) subgoal detectNewBots();
     }
 }
+
+
+	
+
+
+
