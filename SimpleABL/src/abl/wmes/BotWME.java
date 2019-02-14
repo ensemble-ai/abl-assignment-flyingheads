@@ -20,13 +20,25 @@ public class BotWME extends WME {
 	/** ID of the bot */
 	private int id;
 	
+	/** True if bot is new **/
+	private int newb;
+	
+	/** True if a formation bot (for intermediate task) **/
+	private int fBot;
+	
+	/** Formation if fBot **/
+	private Point formation;
+	
 	/**
 	 * Instantiates a working memory element for tracking a bot.
 	 */
-	public BotWME(Point location, Point trajectory, int id) {
+	public BotWME(Point location, Point trajectory, int id, int newb, int fBot, Point formation) {
 		this.location = location;
 		this.trajectory = trajectory;
 		this.id = id;
+		this.newb = newb;
+		this.fBot = fBot;
+		this.formation = formation;
 	}
 	
 	/**
@@ -63,5 +75,21 @@ public class BotWME extends WME {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getNewb() {
+		return newb;
+	}
+	
+	public int getFBot() {
+		return fBot;
+	}
+	
+	public int getFormationX() {
+		return formation.x;
+	}
+	
+	public int getFormationY() {
+		return formation.y;
 	}
 }
