@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 import abl.generated.ChaserAgent;
 import abl.generated.StarterAgent;
+import abl.generated.IntermediateAgent.abl;
+import abl.generated.AdvancedAgent.abl;
 import game.input.*;
 /**
  *  Simple "game" for showing how to interface an ABL agent.
@@ -132,10 +134,8 @@ public class GameEngine extends JPanel implements KeyListener {
 	 * Note: this method does not return, the ABL agent decision cycle claims the thread.
 	 */
 	public void startAgent() {
-		 //ChaserAgent agent = new ChaserAgent();
-		 //agent.startBehaving();
-		 StarterAgent starterAgent = new StarterAgent();
-		 starterAgent.startBehaving();
+		 ChaserAgent agent = new ChaserAgent();
+		 agent.startBehaving();
 	}
 
 	/**
@@ -331,14 +331,6 @@ public class GameEngine extends JPanel implements KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && keyPresses[KeyEvent.VK_SPACE] == false) {
 			spawnBullet = true;
-		}
-		
-		if (e.getKeyCode() == KeyEvent.VK_B && keyPresses[KeyEvent.VK_B] == false) {
-			Bot b = new Bot();
-			b.setLocation(new Point(dimensions.x/2 + 10, dimensions.y/2 + 10));
-			b.setColor(Color.PINK);
-			bots.add(b);
-			
 		}
 
 		if (e.getKeyCode() < keyPresses.length) {
