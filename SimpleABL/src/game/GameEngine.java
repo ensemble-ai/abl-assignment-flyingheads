@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 
 import abl.generated.ChaserAgent;
 import abl.generated.StarterAgent;
-import abl.generated.IntermediateAgent.abl;
-import abl.generated.AdvancedAgent.abl;
 import game.input.*;
 /**
  *  Simple "game" for showing how to interface an ABL agent.
