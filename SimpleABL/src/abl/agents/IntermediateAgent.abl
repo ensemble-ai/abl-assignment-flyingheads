@@ -11,7 +11,7 @@ import abl.sensors.*;
  * @author Josh McCoy 1-23-2019
  * @author Ben Weber 3-7-11
  */ 
-behaving_entity ChaserAgent {
+behaving_entity IntermediateAgent {
 // This defines a name for the agent 
 
 	/** 
@@ -21,7 +21,7 @@ behaving_entity ChaserAgent {
 	 * The prototype parameters correspond to the types expected by the execute(object[]) method 
 	 * in the action's Java class.
 	 */
-	register act moveTo(int, int, int) with MoveTo; 
+	register act move(int, int, int) with Move;
 	register act stop(int) with Stop;
 	register act fire(int, int, int, int) with Fire;
 	register act isNew(int) with IsNew;
@@ -58,7 +58,7 @@ behaving_entity ChaserAgent {
 			(id == bid)
 		}
 		specificity 3;
-		act moveTo(0,-1,id);
+		act move(0,-1,id);
 		subgoal Wait(20);
 	}
 	
@@ -71,7 +71,7 @@ behaving_entity ChaserAgent {
 			(id == bid)
 		}
 		specificity 3;
-		act moveTo(0,1,id);
+		act move(0,1,id);
 		subgoal Wait(20);
 	}
 	
@@ -84,7 +84,7 @@ behaving_entity ChaserAgent {
 			(id == bid)
 		}
 		specificity 2;
-		act moveTo(1,0,id);
+		act move(1,0,id);
 		subgoal Wait(20);
 	}
 	
@@ -97,7 +97,7 @@ behaving_entity ChaserAgent {
 			(id == bid)
 		}
 		specificity 2;
-		act moveTo(-1,0,id);
+		act move(-1,0,id);
 		subgoal Wait(20);
 	}
 
