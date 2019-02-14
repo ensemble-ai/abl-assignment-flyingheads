@@ -48,8 +48,8 @@ public class GameEngine extends JPanel implements KeyListener {
 	/** speed of the player character */
 	private static final int PlayerSpeed = 4;
 
-	/** speed of the player character */
-	public static final int BotSpeed = 2;
+	/** speed of the bot character */
+	public static final int BotSpeed = 7;
 
 	/** keys held down */
 	private boolean[] keyPresses = new boolean[256];
