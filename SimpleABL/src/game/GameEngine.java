@@ -15,7 +15,7 @@ import javax.swing.WindowConstants;
 import abl.generated.ChaserAgent;
 import abl.generated.StarterAgent;
 import abl.generated.IntermediateAgent;
-//import abl.generated.AdvancedAgent;
+import abl.generated.AdvancedAgent;
 import game.input.*;
 /**
  *  Simple "game" for showing how to interface an ABL agent.
@@ -149,10 +149,10 @@ public class GameEngine extends JPanel implements KeyListener {
 		 //agent.startBehaving();
 		 //StarterAgent starterAgent = new StarterAgent();
 		 //starterAgent.startBehaving();
-		 IntermediateAgent intermediateAgent = new IntermediateAgent();
-		 intermediateAgent.startBehaving();
-		 //AdvancedAgent advancedAgent = new AdvancedAgent();
-		 //advancedAgent.startBehaving();
+		 //IntermediateAgent intermediateAgent = new IntermediateAgent();
+		 //intermediateAgent.startBehaving();
+		 AdvancedAgent advancedAgent = new AdvancedAgent();
+		 advancedAgent.startBehaving();
 	}
 
 	/**
