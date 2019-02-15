@@ -23,9 +23,9 @@ public class SetColor extends BaseAction {
 	 */
 	@Override
 	public void execute(Object[] args) {
-		System.out.println("Inside the SetColor Function");
+		System.out.println("IDD :" + (Integer)args[3]);
 		for(Bot b:GameEngine.getInstance().getBots()) {
-			if(b.getId() == (Integer)args[2]) {
+			if(b.getId() == (Integer)args[3]) {
 				Color c =new Color((Integer)args[0], (Integer)args[1], (Integer)args[2]);
 				b.setColor(c);
 			}

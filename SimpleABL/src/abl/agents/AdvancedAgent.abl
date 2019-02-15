@@ -25,6 +25,7 @@ behaving_entity AdvancedAgent {
 	register act stop(int) with Stop;
 	register act fire(int, int, int, int) with Fire;
 	register act isNew(int) with IsNew;
+	register act setColor(int, int, int, int) with SetColor;
 
 	/**
 	 * Define the sensors that add game state to working memory. Each sensor defines the name of the WME class
@@ -39,7 +40,68 @@ behaving_entity AdvancedAgent {
 	 * It is also possible to use constants from a Java interface (e.g.):
      * constants game.Constants;   
 	 */ 
-	int botSpeed = 2;	
+	int botSpeed = 2;
+	
+	sequential behavior manageColor(int id) {
+		subgoal Wait(2000);
+		with (persistent) subgoal changeColor(id);
+	}	
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY > botY)
+			(playerX > botX)
+			((30 > (playerY - botY)) && (30 > (playerX - botX)))
+			(bid == id)
+		}
+		specificity 2;
+		act setColor(255,0, 0,id);
+		subgoal Wait(500);
+	}
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY < botY)
+			(playerX < botX)
+			((30 > (botY - playerY)) && (30 > (botX - playerX)))
+			(bid == id)
+		}
+		specificity 2;
+		act setColor(255,0, 0,id);
+		subgoal Wait(500);
+	}
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY > botY)
+			(playerX < botX)
+			((30 > (playerY - botY)) && (30 > (botX - playerX)))
+			(bid == id)
+		}
+		specificity 2;
+		act setColor(255,0, 0,id);
+		subgoal Wait(500);
+	}
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY < botY)
+			(playerX > botX)
+			((30 > (botY - playerY)) && (30 > (playerX - botX)))
+			(bid == id)
+		}
+		specificity 2;
+		act setColor(255,0, 0,id);
+		subgoal Wait(500);
+	}
 
 	sequential behavior angryBots(int id) {
 		subgoal Wait(500);
@@ -185,9 +247,10 @@ behaving_entity AdvancedAgent {
 	}
 	
 	parallel behavior newBotGoals(int id){
+		with (priority 2) spawngoal manageColor(id);
 		with (priority 3) spawngoal manageFiring(id);
 		with (priority 2) spawngoal angryBots(id);
-		with (priority 4) mental_act {
+		with (priority 5) mental_act {
 			System.out.println("spawned new goals");
     	}
 	}
@@ -216,8 +279,6 @@ behaving_entity AdvancedAgent {
 		subgoal Wait(500);
 	}
 
-
-
     /**
      * Utility behavior for suspending the execution of a behavior.
      *
@@ -242,10 +303,11 @@ behaving_entity AdvancedAgent {
      * Note: priorities are used to ensure all goals are pursued, since the move() goal can thrash in this simple example
      */
     initial_tree {
-    	with (priority 4) mental_act {
-			System.out.println("Starting bot Agent 3");
+    	with (priority 5) mental_act {
+			System.out.println("Starting bot Agent 8");
     	}
      	
+     	with (priority 2) subgoal manageColor(0);
     	with (priority 3) subgoal manageFiring(0);
     	with (priority 2) subgoal angryBots(0);
     	with (priority 2) subgoal detectNewBots();

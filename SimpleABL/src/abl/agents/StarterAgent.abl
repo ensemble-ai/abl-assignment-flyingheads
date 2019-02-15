@@ -14,9 +14,6 @@ behaving_entity StarterAgent {
     register wme BotWME with BotSensor;
     
     sequential behavior manageColor() {
-		mental_act {
-			System.out.println("Inside the manageColor 00 Function");
-		}
 		subgoal color();
 	}
 	
@@ -44,9 +41,6 @@ behaving_entity StarterAgent {
 	 * Continuously move towards the player character.
 	 */
 	sequential behavior manageMovement() {
-		mental_act {
-			System.out.println("Inside the manageMovement 00 Function");
-		}
 		//subgoal Wait(2000);
 		with (persistent) subgoal moveTo();
 	}
