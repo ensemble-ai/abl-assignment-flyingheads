@@ -96,7 +96,6 @@ behaving_entity StarterAgent {
 			(BotWME locationX::botX locationY::botY id::id) 
 			(playerX < botX)
 			(playerY > botY)
-			
 		}
 		specificity 3;
  

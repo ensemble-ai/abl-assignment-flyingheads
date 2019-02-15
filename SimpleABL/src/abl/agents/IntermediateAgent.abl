@@ -34,7 +34,7 @@ behaving_entity IntermediateAgent {
     register wme BotWME with BotSensor;
 
 	sequential behavior manageFormation(int id){
-	subgoal Wait (100);
+		subgoal Wait (100);
 		with (persistent) subgoal formation(id);
 	}
 	
@@ -51,53 +51,57 @@ behaving_entity IntermediateAgent {
 
 	sequential behavior formation(int bid) {
 		precondition {
-			(PlayerWME locationY::playerY)
-			(BotWME locationY::botY formationY::formationY fBot::fBot id::id) 
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY formationY::formationY formationX::formationX fBot::fBot id::id) 
 			(botY > (playerY + formationY))
-			(fBot == 1)
-			(id == bid)
-		}
-		specificity 3;
-		act move(0,-1,id);
-		subgoal Wait(20);
-	}
-	
-	sequential behavior formation(int bid) {
-		precondition {
-			(PlayerWME locationY::playerY)
-			(BotWME locationY::botY formationY::formationY fBot::fBot id::id) 
-			(botY < (playerY + formationY))
-			(fBot == 1)
-			(id == bid)
-		}
-		specificity 3;
-		act move(0,1,id);
-		subgoal Wait(20);
-	}
-	
-	sequential behavior formation(int bid) {
-		precondition {
-			(PlayerWME locationX::playerX)
-			(BotWME locationX::botX formationX::formationX fBot::fBot id::id) 
-			(botX < (playerX + formationX))
-			(fBot == 1)
-			(id == bid)
-		}
-		specificity 2;
-		act move(1,0,id);
-		subgoal Wait(20);
-	}
-	
-	sequential behavior formation(int bid) {
-		precondition {
-			(PlayerWME locationX::playerX)
-			(BotWME locationX::botX formationX::formationX fBot::fBot id::id) 
 			(botX > (playerX + formationX))
 			(fBot == 1)
 			(id == bid)
 		}
+		specificity 3;
+		act move(-1,-1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY formationY::formationY formationX::formationX fBot::fBot id::id) 
+			(botY < (playerY + formationY))
+			(botX < (playerX + formationX))
+			(fBot == 1)
+			(id == bid)
+		}
+		specificity 3;
+		act move(1,1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY formationX::formationX formationY::formationY fBot::fBot id::id) 
+			(botX < (playerX + formationX))
+			(botY > (playerY + formationY))
+			(fBot == 1)
+			(id == bid)
+		}
 		specificity 2;
-		act move(-1,0,id);
+		act move(1,-1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY formationX::formationX formationY::formationY fBot::fBot id::id) 
+			(botX > (playerX + formationX))
+			(botY < (playerY + formationY))
+			(fBot == 1)
+			(id == bid)
+		}
+		specificity 2;
+		act move(-1,1,id);
 		subgoal Wait(20);
 	}
 

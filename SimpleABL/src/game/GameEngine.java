@@ -149,10 +149,10 @@ public class GameEngine extends JPanel implements KeyListener {
 		 //agent.startBehaving();
 		 //StarterAgent starterAgent = new StarterAgent();
 		 //starterAgent.startBehaving();
-		 //IntermediateAgent intermediateAgent = new IntermediateAgent();
-		 //intermediateAgent.startBehaving();
-		 AdvancedAgent advancedAgent = new AdvancedAgent();
-		 advancedAgent.startBehaving();
+		 IntermediateAgent intermediateAgent = new IntermediateAgent();
+		 intermediateAgent.startBehaving();
+		 //AdvancedAgent advancedAgent = new AdvancedAgent();
+		 //advancedAgent.startBehaving();
 	}
 
 	/**
