@@ -16,6 +16,7 @@ import abl.generated.ChaserAgent;
 import abl.generated.StarterAgent;
 import abl.generated.IntermediateAgent;
 import abl.generated.AdvancedAgent;
+//import abl.generated.SuperAdvanced;
 import game.input.*;
 /**
  *  Simple "game" for showing how to interface an ABL agent.
@@ -122,7 +123,7 @@ public class GameEngine extends JPanel implements KeyListener {
 		//b.setNewb();
 		//bots.add(b);
 		
-		spawnFourBots = true;
+		//spawnFourBots = true;
 		
 		// spawn an update thread
 		new Thread() {
@@ -147,12 +148,14 @@ public class GameEngine extends JPanel implements KeyListener {
 	public void startAgent() {
 		 //ChaserAgent agent = new ChaserAgent();
 		 //agent.startBehaving();
-		 StarterAgent starterAgent = new StarterAgent();
-		 starterAgent.startBehaving();
-		 //IntermediateAgent intermediateAgent = new IntermediateAgent();
-		 //intermediateAgent.startBehaving();
+		 //StarterAgent starterAgent = new StarterAgent();
+		 //starterAgent.startBehaving();
+		 IntermediateAgent intermediateAgent = new IntermediateAgent();
+		 intermediateAgent.startBehaving();
 		 //AdvancedAgent advancedAgent = new AdvancedAgent();
 		 //advancedAgent.startBehaving();
+		 //SuperAdvanced superAdvanced = new SuperAdvanced();
+		 //superAdvanced.startBehaving();
 	}
 
 	/**
@@ -239,7 +242,7 @@ public class GameEngine extends JPanel implements KeyListener {
 			b.setLocation(new Point(dimensions.x/2, dimensions.y/2));
 			bots.add(b);
 		}
-		if (spawnFourBots && !spawnedFourBots) {
+		if (spawnFourBots /*&& !spawnedFourBots*/) {
 			spawnFourBots = false;
 			spawnedFourBots = true;
 			
@@ -399,7 +402,7 @@ public class GameEngine extends JPanel implements KeyListener {
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_F && keyPresses[KeyEvent.VK_F] == false) {
-			//spawnFourBots = true;
+			spawnFourBots = true;
 		}
 		
 		if (e.getKeyCode() < keyPresses.length) {
