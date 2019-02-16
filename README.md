@@ -64,6 +64,7 @@ Our advanced agent has following characteristics :
 * All the bots generated in the game are angry at the player and maintain a certain distance at all times. 
 * If the player approaches a bot and manages to come closer to the bot, it turns into red color (signigying anger).
 * If the player is very close to the bot, it transforms from a small red bot to a large red bot. 
+* When the bot is at safe distance from the player, it changes back into green color, signifying a relaxed state. 
 
 Initially, you would observe a player colored in blue. You can use arrow keys to change it's position. 
 
