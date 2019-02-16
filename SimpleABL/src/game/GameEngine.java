@@ -117,10 +117,10 @@ public class GameEngine extends JPanel implements KeyListener {
 		this.initializeInputs();
 		
 		//spawn a single default bot
-		Bot b = new Bot();
-		b.setLocation(new Point(dimensions.x/2, dimensions.y/2));
-		b.setNewb();
-		bots.add(b);
+		//Bot b = new Bot();
+		//b.setLocation(new Point(dimensions.x/2, dimensions.y/2));
+		//b.setNewb();
+		//bots.add(b);
 		
 		spawnFourBots = true;
 		
@@ -147,12 +147,12 @@ public class GameEngine extends JPanel implements KeyListener {
 	public void startAgent() {
 		 //ChaserAgent agent = new ChaserAgent();
 		 //agent.startBehaving();
-		 //StarterAgent starterAgent = new StarterAgent();
-		 //starterAgent.startBehaving();
+		 StarterAgent starterAgent = new StarterAgent();
+		 starterAgent.startBehaving();
 		 //IntermediateAgent intermediateAgent = new IntermediateAgent();
 		 //intermediateAgent.startBehaving();
-		 AdvancedAgent advancedAgent = new AdvancedAgent();
-		 advancedAgent.startBehaving();
+		 //AdvancedAgent advancedAgent = new AdvancedAgent();
+		 //advancedAgent.startBehaving();
 	}
 
 	/**

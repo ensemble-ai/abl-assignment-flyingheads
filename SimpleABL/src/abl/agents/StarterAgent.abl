@@ -8,7 +8,7 @@ import abl.sensors.*;
 behaving_entity StarterAgent {
 	
 	register act move(int, int, int) with Move;
-	register act setColor(int, int, int) with SetColor;
+	register act setColor(int, int, int, int) with SetColor;
 	
 	register wme PlayerWME with PlayerSensor;
     register wme BotWME with BotSensor;
@@ -18,7 +18,7 @@ behaving_entity StarterAgent {
 	}
 	
 	sequential behavior color() {
-		act setColor(255,255,0);
+		act setColor(255,255,0,0);
 	}
 	
 	/**
