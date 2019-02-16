@@ -1,0 +1,107 @@
+package abl.generated;
+// the package corresponds to where generated Java files are placed.
+
+import abl.wmes.*;
+import abl.actions.*;
+import abl.sensors.*;
+
+behaving_entity StarterAgent {
+	
+	register act move(int, int, int) with Move;
+	register act setColor(int, int, int) with SetColor;
+	
+	register wme PlayerWME with PlayerSensor;
+    register wme BotWME with BotSensor;
+    
+    sequential behavior manageColor() {
+		subgoal color();
+	}
+	
+	sequential behavior color() {
+		act setColor(255,255,0);
+	}
+	
+	/**
+     * Utility behavior for suspending the execution of a behavior.
+     *
+     * This behavior consist of two steps. First, the mental act compute the finishing time
+     * based on the input delay. Second, the success tests waits until the condition check
+     * evaluates to true.
+     */
+	sequential behavior Wait(int milliseconds) {
+		long finish;
+	    mental_act { 
+	    	finish = System.currentTimeMillis() + milliseconds; 
+	    }
+	    
+	    with ( success_test { (System.currentTimeMillis() > finish) } ) wait;
+	}
+	
+	/**
+	 * Continuously move towards the player character.
+	 */
+	sequential behavior manageMovement() {
+		//subgoal Wait(2000);
+		with (persistent) subgoal moveTo();
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX < botX)
+			(playerY < botY)
+			
+		}
+		specificity 3;
+ 
+		act move(-1, -1, id);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX > botX)
+			(playerY > botY)
+			
+		}
+		specificity 3;
+ 
+		act move(1, 1, id);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX > botX)
+			(playerY < botY)
+			
+		}
+		specificity 3;
+ 
+		act move(1, -1, id);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX < botX)
+			(playerY > botY)
+		}
+		specificity 3;
+ 
+		act move(-1, 1, id);
+	}
+	
+	initial_tree {
+		with (priority 3) mental_act {
+			System.out.println("The Test agent has started on initial_tree.");
+		}
+		with (priority 2) subgoal manageColor();
+		with (priority 1) subgoal manageMovement();
+		
+	}
+}

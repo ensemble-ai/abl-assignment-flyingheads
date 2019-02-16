@@ -13,7 +13,8 @@ public abstract class SerialSensor extends DefaultAsyncSensor{
 	 * 
      * Note: This is invoked for success tests and context conditions.
 	 */
-    public void senseContinuous(Object[] args) {
+    @Override
+	public void senseContinuous(Object[] args) {
         sense(args);
     }
 	
@@ -22,14 +23,16 @@ public abstract class SerialSensor extends DefaultAsyncSensor{
 	 * 
      * Note: This is invoked via senseOneShot, which is used in preconditions.
      */
-    protected void sense(Object[] args) {
+    @Override
+	protected void sense(Object[] args) {
         sense();        
     }
 
     /**
      * Enable parallel sensing.
      */
-    public boolean canBeParallel() {
+    @Override
+	public boolean canBeParallel() {
     	return true;
     }
     

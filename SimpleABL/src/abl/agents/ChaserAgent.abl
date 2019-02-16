@@ -163,6 +163,17 @@ behaving_entity ChaserAgent {
 	    
 	    with ( success_test { (System.currentTimeMillis() > finish) } ) wait;
 	}
+	
+	sequential behavior detectNewBots(){
+		/*with ( success_test {
+			(BotWME id::id)	 
+		})*/
+		
+		mental_act {
+			System.out.println("detectNewBots printing ");
+    	}
+		
+	}
  
     /** 
      * Root of the active behavior tree.
@@ -172,11 +183,12 @@ behaving_entity ChaserAgent {
      * Note: prioirities are used to ensure all goals are pursued, since the move() goal can thrash in this simple example
      */
     initial_tree {
-    	with (priority 3) mental_act {
-			System.out.println("Starting bot Agent");
+    	with (priority 4) mental_act {
+			System.out.println("Starting bot Agent sss");
     	}
      	
     	with (priority 2) subgoal manageFiring();
     	with (priority 1) subgoal manageMovement();
+    	with (priority 3) subgoal detectNewBots();
     }
 }
