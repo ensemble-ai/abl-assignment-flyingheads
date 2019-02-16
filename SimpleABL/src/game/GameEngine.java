@@ -10,8 +10,12 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import abl.generated.ChaserAgent;
+import abl.generated.StarterAgent;
+import abl.generated.IntermediateAgent;
+import abl.generated.AdvancedAgent;
 import game.input.*;
 /**
  *  Simple "game" for showing how to interface an ABL agent.
@@ -45,10 +49,10 @@ public class GameEngine extends JPanel implements KeyListener {
 	private static final int bulletSize = 4;
 
 	/** speed of the player character */
-	private static final int PlayerSpeed = 4;
+	private static final int PlayerSpeed = 1;
 
 	/** speed of the player character */
-	public static final int BotSpeed = 2;
+	public static final int BotSpeed = 1;
 
 	/** keys held down */
 	private boolean[] keyPresses = new boolean[256];
@@ -59,6 +63,13 @@ public class GameEngine extends JPanel implements KeyListener {
 	/** did the player fire a bullet */
 	private boolean spawnBullet = false;
 
+	/** did the player spawn a new bot */
+	private boolean spawnBot = false;
+	
+	/** did the player spawn four formation bots */
+	private boolean spawnFourBots = false;
+	private boolean spawnedFourBots = false; //makes it so this only happens once at most
+	
 	/** bullets which have been fired by both players */
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
@@ -70,6 +81,8 @@ public class GameEngine extends JPanel implements KeyListener {
 
 	/** target position of the chaser bullet */
 	private Point bulletTarget;
+	
+	public boolean angry = false;
 
 	/** holds the input classes */
 	private ArrayList<IInput> inputs = new ArrayList<IInput>();
@@ -97,7 +110,7 @@ public class GameEngine extends JPanel implements KeyListener {
 		JFrame frame = new JFrame("ABL Chaser");
 		frame.add(this);
 		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.addKeyListener(this);
 		frame.setResizable(false);
 		frame.setVisible(true);
@@ -108,10 +121,14 @@ public class GameEngine extends JPanel implements KeyListener {
 		//spawn a single default bot
 		Bot b = new Bot();
 		b.setLocation(new Point(dimensions.x/2, dimensions.y/2));
+		b.setNewb();
 		bots.add(b);
+		
+		spawnFourBots = true;
 		
 		// spawn an update thread
 		new Thread() {
+			@Override
 			public void run() {
 				while (true) {
 					try {
@@ -130,16 +147,25 @@ public class GameEngine extends JPanel implements KeyListener {
 	 * Note: this method does not return, the ABL agent decision cycle claims the thread.
 	 */
 	public void startAgent() {
-		 ChaserAgent agent = new ChaserAgent();
-		 agent.startBehaving();
+		 //ChaserAgent agent = new ChaserAgent();
+		 //agent.startBehaving();
+		 //StarterAgent starterAgent = new StarterAgent();
+		 //starterAgent.startBehaving();
+		 //IntermediateAgent intermediateAgent = new IntermediateAgent();
+		 //intermediateAgent.startBehaving();
+		 AdvancedAgent advancedAgent = new AdvancedAgent();
+		 advancedAgent.startBehaving();
 	}
 
 	/**
 	 * Updates the positions of objects, and draws the scene.
 	 */
+	@Override
 	public void paint(Graphics g) {
 		updateLocations();
 		updateBullets();
+		updateBots();
+		updateEmotion();
 	
 		super.paint(g);
 
@@ -206,6 +232,64 @@ public class GameEngine extends JPanel implements KeyListener {
 		}
 	}
 
+	
+	public void updateEmotion() {
+		if (keyPresses[KeyEvent.VK_A]) {
+			angry =true ;
+			
+		}
+		
+		if (keyPresses[KeyEvent.VK_H]) {
+			angry =false ;
+			
+		}
+			
+	}
+	
+	
+	public void updateBots() {
+		// spawn bot 
+		if (spawnBot) {
+			spawnBot = false;
+
+			//spawn a single bot
+			Bot b = new Bot();
+			b.setLocation(new Point(dimensions.x/2, dimensions.y/2));
+			bots.add(b);
+		}
+		if (spawnFourBots && !spawnedFourBots) {
+			spawnFourBots = false;
+			spawnedFourBots = true;
+			
+			//spawn four bots 
+			Bot b1 = new Bot();
+			b1.setLocation(new Point(playerLocation.x + 25, playerLocation.y + 25));
+			b1.setfBot();
+			
+			Bot b2 = new Bot();
+			b2.setLocation(new Point(playerLocation.x + 25, playerLocation.y - 25));
+			b2.setfBot();
+			
+			Bot b3 = new Bot();
+			b3.setLocation(new Point(playerLocation.x - 25, playerLocation.y + 25));
+			b3.setfBot();
+			
+			Bot b4 = new Bot();
+			b4.setLocation(new Point(playerLocation.x - 25, playerLocation.y - 25));
+			b4.setfBot();
+			
+			b1.setFormation(new Point(25,25));
+			b2.setFormation(new Point(25,-25));
+			b3.setFormation(new Point(-25,25));
+			b4.setFormation(new Point(-25,-25));
+			
+			bots.add(b1);
+			bots.add(b2);
+			bots.add(b3);
+			bots.add(b4);
+		}
+	}
+	
 	/**
 	 * Updates the positions of objects in the scene based on their trajectories and the dimensions of the scene.
 	 */
@@ -282,6 +366,10 @@ public class GameEngine extends JPanel implements KeyListener {
 		return playerLocation;
 	}
 
+	public boolean getPlayerEmotion() {
+		return angry;
+	}
+	
 	/**
 	 * Returns the trajectory of the player.
 	 */
@@ -320,6 +408,7 @@ public class GameEngine extends JPanel implements KeyListener {
 	 *
 	 * Note: tracks presses and releases with a boolean value to avoid duplicate key presses.
 	 */
+	@Override
 	public void keyPressed(KeyEvent e) {
 		
 
@@ -327,6 +416,14 @@ public class GameEngine extends JPanel implements KeyListener {
 			spawnBullet = true;
 		}
 
+		if (e.getKeyCode() == KeyEvent.VK_B && keyPresses[KeyEvent.VK_B] == false) {
+			spawnBot = true;
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_F && keyPresses[KeyEvent.VK_F] == false) {
+			//spawnFourBots = true;
+		}
+		
 		if (e.getKeyCode() < keyPresses.length) {
 			keyPresses[e.getKeyCode()] = true;
 		}
@@ -339,11 +436,13 @@ public class GameEngine extends JPanel implements KeyListener {
 	/**
 	 * Release key state.
 	 */
+	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() < keyPresses.length) {
 			keyPresses[e.getKeyCode()] = false;
 		}
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {}
 }
