@@ -26,6 +26,7 @@ behaving_entity AdvancedAgent {
 	register act fire(int, int, int, int) with Fire;
 	register act isNew(int) with IsNew;
 	register act setColor(int, int, int, int) with SetColor;
+	register act setSize(int, int) with SetSize;
 
 	/**
 	 * Define the sensors that add game state to working memory. Each sensor defines the name of the WME class
@@ -42,6 +43,8 @@ behaving_entity AdvancedAgent {
 	 */ 
 	int botSpeed = 2;
 	
+	/******************Manage Color Starts********************/
+	
 	sequential behavior manageColor(int id) {
 		subgoal Wait(2000);
 		with (persistent) subgoal changeColor(id);
@@ -57,6 +60,9 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		if{((20 > (playerY - botY)) && (20 > (playerX - botX)))} {
+			act setSize(15, id);
+		}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
@@ -71,6 +77,9 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		if{((20 > (botY - playerY)) && (20 > (botX - playerX)))} {
+			act setSize(15, id);
+		}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
@@ -85,6 +94,9 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		if{((20 > (playerY - botY)) && (20 > (botX - playerX)))} {
+			act setSize(15, id);
+		}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
@@ -99,9 +111,81 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		if{((20 > (botY - playerY)) && (20 > (playerX - botX)))} {
+			act setSize(15, id);
+		}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY > botY)
+			(playerX > botX)
+			((30 < (playerY - botY)) && (30 < (playerX - botX)))
+			(bid == id)
+		}
+		specificity 2;
+		if{((20 < (playerY - botY)) && (20 < (playerX - botX)))} {
+			act setSize(10, id);
+		}
+		act setColor(0, 128, 0,id);
+		subgoal Wait(500);
+	}
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY < botY)
+			(playerX < botX)
+			((30 < (botY - playerY)) && (30 < (botX - playerX)))
+			(bid == id)
+		}
+		specificity 2;
+		if{((20 < (botY - playerY)) && (20 < (botX - playerX)))} {
+			act setSize(10, id);
+		}
+		act setColor(0, 128, 0,id);
+		subgoal Wait(500);
+	}
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY > botY)
+			(playerX < botX)
+			((30 < (playerY - botY)) && (30 < (botX - playerX)))
+			(bid == id)
+		}
+		specificity 2;
+		if{((20 < (playerY - botY)) && (20 < (botX - playerX)))} {
+			act setSize(10, id);
+		}
+		act setColor(0, 128, 0,id);
+		subgoal Wait(500);
+	}
+	
+	sequential behavior changeColor(int id) {
+		precondition {
+			(PlayerWME locationX::playerX locationY::playerY)
+			(BotWME locationX::botX locationY::botY id::bid)
+			(playerY < botY)
+			(playerX > botX)
+			((30 < (botY - playerY)) && (30 < (playerX - botX)))
+			(bid == id)
+		}
+		specificity 2;
+		if{((20 < (botY - playerY)) && (20 < (playerX - botX)))} {
+			act setSize(10, id);
+		}
+		act setColor(0, 128, 0,id);
+		subgoal Wait(500);
+	}
+	/*********************Manage color ends*********************/
 
 	sequential behavior angryBots(int id) {
 		subgoal Wait(500);
