@@ -148,10 +148,10 @@ public class GameEngine extends JPanel implements KeyListener {
 	public void startAgent() {
 		 //ChaserAgent agent = new ChaserAgent();
 		 //agent.startBehaving();
-		 //StarterAgent starterAgent = new StarterAgent();
-		 //starterAgent.startBehaving();
-		 IntermediateAgent intermediateAgent = new IntermediateAgent();
-		 intermediateAgent.startBehaving();
+		 StarterAgent starterAgent = new StarterAgent();
+		 starterAgent.startBehaving();
+		 //IntermediateAgent intermediateAgent = new IntermediateAgent();
+		 //intermediateAgent.startBehaving();
 		 //AdvancedAgent advancedAgent = new AdvancedAgent();
 		 //advancedAgent.startBehaving();
 		 //SuperAdvanced superAdvanced = new SuperAdvanced();
@@ -403,6 +403,12 @@ public class GameEngine extends JPanel implements KeyListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_F && keyPresses[KeyEvent.VK_F] == false) {
 			spawnFourBots = true;
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_C && keyPresses[KeyEvent.VK_C] == false) {
+			for (Bot bot : this.bots) {
+				bot.setColor(Color.PINK);
+			}
 		}
 		
 		if (e.getKeyCode() < keyPresses.length) {
