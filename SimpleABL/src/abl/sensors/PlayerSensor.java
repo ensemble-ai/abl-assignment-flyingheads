@@ -13,6 +13,7 @@ public class PlayerSensor extends SerialSensor {
 	/**
 	 * Adds a Player WME to working memory of the agent and deletes previous player WMEs in memory.
 	 */
+	@Override
 	protected void sense() {
 
 		BehavingEntity.getBehavingEntity().deleteAllWMEClass("PlayerWME");

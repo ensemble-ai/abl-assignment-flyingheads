@@ -1,14 +1,15 @@
 package abl.actions;
 
+import game.Bot;
 import game.GameEngine;
 
-import java.awt.Point;
+import java.awt.Color;
 /**
  * Fires a bullet. 
  * 
  * @author Ben Weber 3-7-11
  */
-public class Fire extends BaseAction {
+public class SetColor extends BaseAction {
 
 	/**
 	 * Fires a bullet at the target location.
@@ -21,8 +22,11 @@ public class Fire extends BaseAction {
 	 */
 	@Override
 	public void execute(Object[] args) {
-		GameEngine.getInstance().fireBullet(
-				new Point((Integer)args[0], (Integer)args[1]), 
-				new Point((Integer)args[2], (Integer)args[3]));
+		for(Bot b:GameEngine.getInstance().getBots()) {
+			if(b.getId() == (Integer)args[3]) {
+				Color c =new Color((Integer)args[0], (Integer)args[1], (Integer)args[2]);
+				b.setColor(c);
+			}
+		}
 	}
 }

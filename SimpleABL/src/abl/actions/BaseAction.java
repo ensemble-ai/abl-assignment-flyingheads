@@ -11,12 +11,14 @@ public abstract class BaseAction extends PrimitiveAction {
 	/**  
 	 * Performs the physcial act. 
 	 */
+	@Override
 	abstract public void execute(Object[] args);
 
 	/**
 	 * Returns that the action has completed successfully. 
 	 */
-    public synchronized int getCompletionStatus() {
+    @Override
+	public synchronized int getCompletionStatus() {
     	return completionStatus = SUCCESS;
     }
 }

@@ -9,17 +9,17 @@ import java.awt.Point;
  * 
  * @author Ben Weber 3-7-11
  */
-public class MoveUp extends BaseAction {
+public class Move extends BaseAction {
 
 	/**
-	 * Sets the trajectory of the player to move up.
+	 * Sets the trajectory of the player to move right.
 	 * args[0] - bot id
 	 */
 	@Override
 	public void execute(Object[] args) {
 		for(Bot b:GameEngine.getInstance().getBots()) {
-			if(b.getId() == (Integer)args[0]) {
-				b.setTrajectory(new Point(0, -GameEngine.BotSpeed));
+			if(b.getId() == (Integer)args[2]) {
+				b.setTrajectory(new Point((Integer)args[0],(Integer)args[1]));
 			}
 		}
 	}

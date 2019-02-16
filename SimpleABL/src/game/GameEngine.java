@@ -12,9 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import abl.generated.ChaserAgent;
-import abl.generated.StarterAgent;
-import abl.generated.IntermediateAgent;
 import abl.generated.AdvancedAgent;
 import game.input.*;
 /**

@@ -49,7 +49,7 @@ behaving_entity AdvancedAgent {
 	
 	sequential behavior changeColor(int id) {
 		precondition {
-			(PlayerWME locationX::playerX locationY::playerY)
+			(PlayerWME locationX::playerX locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(playerY > botY)
 			(playerX > botX)
@@ -57,13 +57,14 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
 	
 	sequential behavior changeColor(int id) {
 		precondition {
-			(PlayerWME locationX::playerX locationY::playerY)
+			(PlayerWME locationX::playerX locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(playerY < botY)
 			(playerX < botX)
@@ -71,13 +72,14 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
 	
 	sequential behavior changeColor(int id) {
 		precondition {
-			(PlayerWME locationX::playerX locationY::playerY)
+			(PlayerWME locationX::playerX locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(playerY > botY)
 			(playerX < botX)
@@ -85,13 +87,14 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
 	
 	sequential behavior changeColor(int id) {
 		precondition {
-			(PlayerWME locationX::playerX locationY::playerY)
+			(PlayerWME locationX::playerX locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(playerY < botY)
 			(playerX > botX)
@@ -99,6 +102,7 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act setColor(255,0, 0,id);
 		subgoal Wait(500);
 	}
@@ -110,7 +114,7 @@ behaving_entity AdvancedAgent {
 	
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationY::playerY)
+			(PlayerWME locationY::playerY emotion::angry)
 			(BotWME locationY::botY id::bid)
 			(playerY > botY)
 			(50 > playerY - botY)
@@ -118,13 +122,14 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act move(0,-1,id);
 		subgoal Wait(100);
 	}
 	
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationY::playerY)
+			(PlayerWME locationY::playerY emotion::angry)
 			(BotWME locationY::botY id::bid)
 			(playerY < botY)
 			(50 > botY - playerY)
@@ -132,13 +137,14 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act move(0,1,id);
 		subgoal Wait(100);
 	}
 	
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationX::playerX)
+			(PlayerWME locationX::playerX emotion::angry)
 			(BotWME locationX::botX id::bid)
 			(playerX > botX)
 			(50 > playerX - botX)
@@ -146,13 +152,14 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act move(-1,0,id);
 		subgoal Wait(100);
 	}
 	
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationX::playerX)
+			(PlayerWME locationX::playerX emotion::angry)
 			(BotWME locationX::botX id::bid)
 			(playerX < botX)
 			(50 > botX - playerX)
@@ -160,6 +167,7 @@ behaving_entity AdvancedAgent {
 			(bid == id)
 		}
 		specificity 2;
+		context_condition {(angry==false)}
 		act move(1,0,id);
 		subgoal Wait(100);
 	}
@@ -167,13 +175,14 @@ behaving_entity AdvancedAgent {
 	//corner case
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationY::playerY)
+			(PlayerWME locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(botX >= 560)
 			(botY >= 370)
 			(bid == id)
 		}
 		specificity 3;
+		context_condition {(angry==false)}
 		act move(-1,-1,id);
 		subgoal Wait(100);
 	}
@@ -181,13 +190,14 @@ behaving_entity AdvancedAgent {
 	//corner case
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationY::playerY)
+			(PlayerWME locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(botX >= 560)
 			(botY <= 60)
 			(bid == id)
 		}
 		specificity 3;
+		context_condition {(angry==false)}
 		act move(-1,1,id);
 		subgoal Wait(100);
 	}
@@ -195,13 +205,14 @@ behaving_entity AdvancedAgent {
 	//corner case
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationY::playerY)
+			(PlayerWME locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(botX <= 60)
 			(botY <= 60)
 			(bid == id)
 		}
 		specificity 3;
+		context_condition {(angry==false)}
 		act move(1,1,id);
 		subgoal Wait(100);
 	}
@@ -209,61 +220,194 @@ behaving_entity AdvancedAgent {
 	//corner case
 	sequential behavior avoid(int id) {
 		precondition {
-			(PlayerWME locationY::playerY)
+			(PlayerWME locationY::playerY emotion::angry)
 			(BotWME locationX::botX locationY::botY id::bid)
 			(botX <= 60)
 			(botY >= 370)
 			(bid == id)
 		}
 		specificity 3;
+		context_condition {(angry==false)}
 		act move(1,-1,id);
 		subgoal Wait(100);
 	}
 	
 	sequential behavior avoid(int id) {
 		precondition {
+		    (PlayerWME locationY::playerY emotion::angry)
 			(BotWME id::bid)
 			(bid == id)
 		}
 		specificity 1;
+		context_condition {(angry==false)}
 		act stop(id);
 		subgoal Wait(100);
 	}
 
+
+    sequential behavior manageFormation(int id){
+       precondition {
+			(PlayerWME locationY::playerY locationX::playerX emotion::angry)
+			
+		}
+		
+		subgoal Wait (1000);
+		with (persistent) subgoal checkformation(id);
+	}
+	
+	sequential behavior checkformation(int id) {
+		     precondition {
+			(PlayerWME emotion::angry)
+//			(angry==false)
+		}
+//    	context_condition {(angry==false)}
+	    subgoal formation(id);
+	   }
+	
+	sequential behavior formation(int bid) {
+		     precondition {
+			(PlayerWME locationY::playerY locationX::playerX emotion::angry)
+			(BotWME  fBot::fBot id::id) 
+			(fBot == 1)
+			(id == bid)
+		}
+		context_condition {(angry==true)}
+		specificity 1;
+		act stop(id);
+		subgoal Wait(20);
+	}
+
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX emotion::angry)
+			(BotWME locationX::botX locationY::botY formationY::formationY formationX::formationX fBot::fBot id::id) 
+			(botY > (playerY + formationY))
+			(botX > (playerX + formationX))
+			(fBot == 1)
+			(id == bid)
+		}
+		context_condition {(angry==true)}
+		specificity 3;
+		act move(-1,-1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+	        (PlayerWME locationY::playerY locationX::playerX emotion::angry)
+			(BotWME locationX::botX locationY::botY formationY::formationY formationX::formationX fBot::fBot id::id) 
+			(botY < (playerY + formationY))
+			(botX < (playerX + formationX))
+			(fBot == 1)
+			(id == bid)
+		}
+		context_condition {(angry==true)}
+		specificity 3;
+		act move(1,1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX emotion::angry)
+			(BotWME locationX::botX locationY::botY formationX::formationX formationY::formationY fBot::fBot id::id) 
+			(botX < (playerX + formationX))
+			(botY > (playerY + formationY))
+			(fBot == 1)
+			(id == bid)
+		}
+		context_condition {(angry==true)}
+		specificity 2;
+		act move(1,-1,id);
+		subgoal Wait(20);
+	}
+	
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX emotion::angry)
+			(BotWME locationX::botX locationY::botY formationX::formationX formationY::formationY fBot::fBot id::id) 
+			(botX > (playerX + formationX))
+			(botY < (playerY + formationY))
+			(fBot == 1)
+			(id == bid)
+		}
+		context_condition {(angry==true)}
+		specificity 2;
+		act move(-1,1,id);
+		subgoal Wait(20);
+	}
+
+	sequential behavior formation(int bid) {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX emotion::angry)
+			(BotWME locationX::botX locationY::botY formationY::formationY formationX::formationX fBot::fBot id::id) 
+			(botY > (playerY + formationY))
+			(botX > (playerX + formationX))
+			(fBot == 1)
+			(id == bid)
+		}
+		context_condition {(angry==true)}
+		specificity 3;
+		act move(-1,-1,id);
+		subgoal Wait(20);
+	}
+ 
   
 
 
-	sequential behavior detectNewBots(){
-		subgoal Wait(1000);
-		with (persistent) subgoal newBotGoal();
+	  sequential behavior detectNewBots(){
+    	with (persistent) subgoal detectNewBots2();
+    	}
+
+	sequential behavior detectNewBots2(){
+	  precondition {
+	 (PlayerWME emotion::angry)}
+		if { (angry==false) }{
+		 subgoal newBotGoal1();
+		}
+		else {
+		subgoal newBotGoal();
+		}
+		
 	}
 	
-	sequential behavior newBotGoal(){
+	parallel behavior newBotGoal1(){
 		precondition {
 			(BotWME id::id newb::newb)
 			(PlayerWME emotion::angry)
-			(angry==true)
+		    (angry==false)
 			(newb == 1)
-		}
-		
-		with (priority 5) mental_act {
-			System.out.println("HEREEEE"+ angry);
-    	}
-		//act isNew(id);
-		subgoal Wait(500);
-	}
-	
-	parallel behavior newBotGoals(int id){
-	    precondition {
-			(PlayerWME emotion::angry)
-			(angry==true)
 		}
 		with (priority 2) spawngoal manageColor(id);
 		with (priority 3) spawngoal manageFiring(id);
 		with (priority 2) spawngoal angryBots(id);
-		with (priority 5) mental_act {
-			System.out.println("spawned new goals");
+		with (priority 4) mental_act {
+			System.out.println("ANGRYYYYY");
     	}
+     	act isNew(id);
+		subgoal Wait(500);
+	}
+	
+	sequential behavior newBotGoal2(){
+	precondition {
+			(PlayerWME emotion::angry)
+		}
+
+		subgoal newBotGoal();
+		}
+	sequential behavior newBotGoal(){
+		precondition {
+			(BotWME id::id newb::newb)
+			(PlayerWME emotion::angry )
+		//	(angry==true)
+			(newb == 1)
+		}
+		with (priority 2) spawngoal manageFormation(id);
+		with (priority 4) mental_act {
+			System.out.println("HAPPPYYY");
+    	}
+		act isNew(id);
+		subgoal Wait(500);
 	}
 
 	/**
@@ -281,11 +425,11 @@ behaving_entity AdvancedAgent {
      */
 	sequential behavior fire(int bid) {
 		precondition {
-			(PlayerWME locationX::playerX locationY::playerY)	// locationX invokes PlayerMWE.getLocationX() 
+			(PlayerWME locationX::playerX locationY::playerY emotion::angry)	// locationX invokes PlayerMWE.getLocationX() 
 			(BotWME locationX::botX locationY::botY id::id)   // :: is used to bind properties to behavior scoped variables
 			(id == bid)
 		}
-
+		context_condition {(angry==false)}
 		act fire(botX, botY, playerX, playerY);	
 		subgoal Wait(500);
 	}
