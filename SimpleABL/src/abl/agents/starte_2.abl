@@ -1,0 +1,142 @@
+package abl.generated;
+// the package corresponds to where generated Java files are placed.
+
+import abl.wmes.*;
+import abl.actions.*;
+import abl.sensors.*;
+
+behaving_entity StarterAgent {
+	
+	register act move(int, int, int) with Move;
+	register act changeColor(int,int,int,int) with SetColor;
+	register act isNew(int) with IsNew;
+	
+	register wme PlayerWME with PlayerSensor;
+    register wme BotWME with BotSensor;
+    
+    int red   = 12;
+	int blue  = 8;
+	int green = 150;
+	
+   sequential behavior detectNewBots(){
+		subgoal Wait(1000);
+		with (persistent) subgoal newBotGoal();
+	}
+	
+	sequential behavior newBotGoal(){
+		precondition {
+			(BotWME id::id newb::newb)
+			(newb == 1)
+		}
+		subgoal newBotGoals(id);
+		act isNew(id);
+		subgoal Wait(500);
+	}
+	
+	parallel behavior newBotGoals(int id){
+		with (priority 2) spawngoal manageColor(id);
+		
+	}
+    
+    sequential behavior manageColor(int id) {
+		subgoal Wait(2000);
+		with (persistent) subgoal changeColor(id);
+	}
+
+  	  sequential behavior changeColor(int id) {
+		
+        mental_act {
+			System.out.println("COLOR ");
+		}
+		act changeColor(id,red,green,blue);
+		subgoal Wait(500);
+	}
+	
+	/**
+     * Utility behavior for suspending the execution of a behavior.
+     *
+     * This behavior consist of two steps. First, the mental act compute the finishing time
+     * based on the input delay. Second, the success tests waits until the condition check
+     * evaluates to true.
+     */
+	sequential behavior Wait(int milliseconds) {
+		long finish;
+	    mental_act { 
+	    	finish = System.currentTimeMillis() + milliseconds; 
+	    }
+	    
+	    with ( success_test { (System.currentTimeMillis() > finish) } ) wait;
+	}
+	
+	/**
+	 * Continuously move towards the player character.
+	 */
+	sequential behavior manageMovement() {
+		subgoal Wait(500);
+		with (persistent) subgoal moveTo();
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX < botX)
+			(playerY < botY)
+			
+		}
+		specificity 3;
+ 
+		act move(-1, -1, id);
+		subgoal Wait(100);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX > botX)
+			(playerY > botY)
+			
+		}
+		specificity 3;
+ 
+		act move(1, 1, id);
+		subgoal Wait(100);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX > botX)
+			(playerY < botY)
+			
+		}
+		specificity 3;
+ 
+		act move(1, -1, id);
+		subgoal Wait(100);
+	}
+	
+	sequential behavior moveTo() {
+		precondition {
+			(PlayerWME locationY::playerY locationX::playerX)
+			(BotWME locationX::botX locationY::botY id::id) 
+			(playerX < botX)
+			(playerY > botY)
+		}
+		specificity 3;
+ 
+		act move(-1, 1, id);
+		subgoal Wait(100);
+	}
+	
+	initial_tree {
+		with (priority 4) mental_act {
+			System.out.println("The Test agent has started on initial_tree.");
+		}
+		with (priority 1) subgoal detectNewBots();
+		with (priority 1) subgoal manageMovement();
+		
+	}
+}
