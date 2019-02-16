@@ -63,7 +63,7 @@ behaving_entity AdvancedAgent {
 		if{((20 > (playerY - botY)) && (20 > (playerX - botX)))} {
 			act setSize(15, id);
 		}
-		act setColor(255,0, 0,id);
+		act setColor(id,255,0, 0);
 		subgoal Wait(500);
 	}
 	
@@ -80,7 +80,7 @@ behaving_entity AdvancedAgent {
 		if{((20 > (botY - playerY)) && (20 > (botX - playerX)))} {
 			act setSize(15, id);
 		}
-		act setColor(255,0, 0,id);
+		act setColor(id,255,0, 0);
 		subgoal Wait(500);
 	}
 	
@@ -97,7 +97,7 @@ behaving_entity AdvancedAgent {
 		if{((20 > (playerY - botY)) && (20 > (botX - playerX)))} {
 			act setSize(15, id);
 		}
-		act setColor(255,0, 0,id);
+		act setColor(id,255,0, 0);
 		subgoal Wait(500);
 	}
 	
@@ -114,7 +114,7 @@ behaving_entity AdvancedAgent {
 		if{((20 > (botY - playerY)) && (20 > (playerX - botX)))} {
 			act setSize(15, id);
 		}
-		act setColor(255,0, 0,id);
+		act setColor(id,255,0, 0);
 		subgoal Wait(500);
 	}
 	
@@ -131,7 +131,7 @@ behaving_entity AdvancedAgent {
 		if{((20 < (playerY - botY)) && (20 < (playerX - botX)))} {
 			act setSize(10, id);
 		}
-		act setColor(0, 128, 0,id);
+		act setColor(id,0, 128, 0);
 		subgoal Wait(500);
 	}
 	
@@ -148,7 +148,7 @@ behaving_entity AdvancedAgent {
 		if{((20 < (botY - playerY)) && (20 < (botX - playerX)))} {
 			act setSize(10, id);
 		}
-		act setColor(0, 128, 0,id);
+		act setColor(id,0, 128, 0);
 		subgoal Wait(500);
 	}
 	
@@ -165,7 +165,7 @@ behaving_entity AdvancedAgent {
 		if{((20 < (playerY - botY)) && (20 < (botX - playerX)))} {
 			act setSize(10, id);
 		}
-		act setColor(0, 128, 0,id);
+		act setColor(id,0, 128, 0);
 		subgoal Wait(500);
 	}
 	
@@ -182,7 +182,7 @@ behaving_entity AdvancedAgent {
 		if{((20 < (botY - playerY)) && (20 < (playerX - botX)))} {
 			act setSize(10, id);
 		}
-		act setColor(0, 128, 0,id);
+		act setColor(id,0, 128, 0);
 		subgoal Wait(500);
 	}
 	/*********************Manage color ends*********************/

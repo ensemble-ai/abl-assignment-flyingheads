@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 
 import abl.generated.ChaserAgent;
 import abl.generated.StarterAgent;
+import abl.generated.StarteAgent_2;
 import abl.generated.IntermediateAgent;
 import abl.generated.AdvancedAgent;
 //import abl.generated.SuperAdvanced;
@@ -150,11 +151,13 @@ public class GameEngine extends JPanel implements KeyListener {
 		 //agent.startBehaving();
 		 StarterAgent starterAgent = new StarterAgent();
 		 starterAgent.startBehaving();
-		 //IntermediateAgent intermediateAgent = new IntermediateAgent();
-		 //intermediateAgent.startBehaving();
-		 //AdvancedAgent advancedAgent = new AdvancedAgent();
-		 //advancedAgent.startBehaving();
-		 //SuperAdvanced superAdvanced = new SuperAdvanced();
+//		 StarteAgent_2 starteAgent_2 = new StarteAgent_2();
+//		 starteAgent_2.startBehaving();
+//		 IntermediateAgent intermediateAgent = new IntermediateAgent();
+//		 intermediateAgent.startBehaving();
+//		 AdvancedAgent advancedAgent = new AdvancedAgent();
+//		 advancedAgent.startBehaving();
+//		 SuperAdvanced superAdvanced = new SuperAdvanced();
 		 //superAdvanced.startBehaving();
 	}
 

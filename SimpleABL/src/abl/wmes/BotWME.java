@@ -96,4 +96,11 @@ public class BotWME extends WME {
 	public int getFormationY() {
 		return formation.y;
 	}
+	
+	public Color getColor() {
+		return color;
+	}
+	public void setColor(int r, int g, int b) {
+		this.color = new Color (r,g,b);
+	}
 }

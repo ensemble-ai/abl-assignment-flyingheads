@@ -26,12 +26,14 @@ public class AgentCompiler {
 			Abl.main(new String[] { "-g2", "-d", "src", "src/abl/agents/StarterAgent.abl" });
 			Abl.main(new String[] { "-g2", "-d", "src", "src/abl/agents/IntermediateAgent.abl" });
 			Abl.main(new String[] { "-g2", "-d", "src", "src/abl/agents/AdvancedAgent.abl" });
+			Abl.main(new String[] { "-g2", "-d", "src", "src/abl/agents/StarteAgent_2.abl" });
 		}
 		else {
 			Abl.main(new String[] { "-d", "src", "src/abl/agents/ChaserAgent.abl" });
 			Abl.main(new String[] { "-d", "src", "src/abl/agents/StarterAgent.abl" });
 			Abl.main(new String[] { "-d", "src", "src/abl/agents/IntermediateAgent.abl" });
 			Abl.main(new String[] { "-d", "src", "src/abl/agents/AdvancedAgent.abl" });
+			Abl.main(new String[] { "-d", "src", "src/abl/agents/StarteAgent_2.abl" });
 		}
 	}
 }

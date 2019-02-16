@@ -24,9 +24,8 @@ public class SetColor extends BaseAction {
 	@Override
 	public void execute(Object[] args) {
 		for(Bot b:GameEngine.getInstance().getBots()) {
-			if(b.getId() == (Integer)args[3]) {
-				Color c =new Color((Integer)args[0], (Integer)args[1], (Integer)args[2]);
-				b.setColor(c);
+			if(b.getId() == (Integer)args[0]) {
+				b.setColor(new Color ((int)args[1],(int)args[2],(int)args[3]));
 			}
 		}
 	}

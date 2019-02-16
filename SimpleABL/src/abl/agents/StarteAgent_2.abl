@@ -5,7 +5,7 @@ import abl.wmes.*;
 import abl.actions.*;
 import abl.sensors.*;
 
-behaving_entity StarterAgent {
+behaving_entity StarteAgent_2 {
 	
 	register act move(int, int, int) with Move;
 	register act changeColor(int,int,int,int) with SetColor;
@@ -45,9 +45,9 @@ behaving_entity StarterAgent {
 
   	  sequential behavior changeColor(int id) {
 		
-        mental_act {
+      /*  mental_act {
 			System.out.println("COLOR ");
-		}
+		}*/
 		act changeColor(id,red,green,blue);
 		subgoal Wait(500);
 	}
