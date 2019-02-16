@@ -8,8 +8,9 @@ This project is divided into three section - Starter tasks, Intermediate tasks a
 
 Starter Tasks
 --------------------
+a)
 Follow the steps below to get the starter agent to work : 
-* In GameEngine.java, uncomment lines 151 and 152  (Starter ABL files). Save the file.
+* In GameEngine.java, uncomment lines 152 and 153  (Starter ABL files). Save the file.
 ```
       StarterAgent starterAgent = new StarterAgent();
       starterAgent.startBehaving();
@@ -29,10 +30,27 @@ Press "C" to change the color of the bots.
 * Add a SetColor action that takes (int r, int b, int g, int id).
 * Add color sensing to the BotWME (this includes changes to BotSensor.java and BotWME.java).
 
+b)
+We also added another starter file, called starteAgent_2.abl), in which every time player inserts a new bot the color of that particular bot turns from yellow to green.   
+
+* In GameEngine.java, uncomment lines 154 and 155  (Starter ABL files). Save the file.
+```
+      StarterAgent starteAgent_2 = new StarteAgent_2();
+      starteAgent_2.startBehaving();
+```
+* Run AgentCompiler.java.
+* Refresh the abl.generated folder.
+* Run GameEngine.java.
+
+Initially, you would observe a player colored in blue. You can use arrow keys to change it's position.
+
+Press "B" to create a new bot. the new bot would move towards the player and the color of the bot would change from yellow to green. 
+
+
 Intermediate Tasks
 --------------------
 Follow the steps below to get the intermediate agent to work : 
-* In GameEngine.java, uncomment lines 153 and 154  (Intermediate ABL files). Save the file.
+* In GameEngine.java, uncomment lines 156 and 157  (Intermediate ABL files). Save the file.
 ```
       IntermediateAgent intermediateAgent = new IntermediateAgent();
       intermediateAgent.startBehaving();
@@ -51,7 +69,7 @@ Press "F" to spawn four new bots around the player. These bots maintain the form
 Advanced Tasks
 --------------------
 Follow the steps below to get the advanced agent to work : 
-* In GameEngine.java, uncomment lines 155 and 156  (Advanced ABL files). Save the file.
+* In GameEngine.java, uncomment lines 158 and 159  (Advanced ABL files). Save the file.
 ```
       AdvancedAgent advancedAgent = new AdvancedAgent();
       advancedAgent.startBehaving();
