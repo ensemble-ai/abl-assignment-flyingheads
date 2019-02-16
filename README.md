@@ -1,13 +1,29 @@
 
-ABL-Assignment
+ABL-Assignment-Solution
 ====================
 
 Description
 --------------------
-For this assignment, you will be authoring rudimentary, intermediate, and advanced ABL behaviors for a single agent that controls multiple bots.
+This project is divided into three section - Starter tasks, Intermediate tasks and Advanced tasks. Please follow the instruction below to navigate throught the project. 
 
 Starter Tasks
 --------------------
+Follow the steps below to get the starter agent to work : 
+* In GameEngine.java, uncomment lines 151 and 152  (Starter ABL files). Save the file.
+```
+      StarterAgent starterAgent = new StarterAgent();
+      starterAgent.startBehaving();
+```
+* Run AgentCompiler.java.
+* Refresh the abl.generated folder.
+* Run GameEngine.java.
+
+Initially, you would observe a player colored in blue. You can use arrow keys to change it's position.
+
+Press "B" to create a new bot. This bot has a MoveTo behavior (which uses the move action) to follow the player around. 
+
+Press "C" to change the color of the bots.
+
 * Add a move action that takes a (int xdir, int ydir, int id) as input.
 * Make a MoveTo behavior that moves a bot to a target location over time.
 * Add a SetColor action that takes (int r, int b, int g, int id).
@@ -15,49 +31,44 @@ Starter Tasks
 
 Intermediate Tasks
 --------------------
+Follow the steps below to get the intermediate agent to work : 
+* In GameEngine.java, uncomment lines 153 and 154  (Intermediate ABL files). Save the file.
+```
+      IntermediateAgent intermediateAgent = new IntermediateAgent();
+      intermediateAgent.startBehaving();
+```
+* Run AgentCompiler.java.
+* Refresh the abl.generated folder.
+* Run GameEngine.java.
+
+Initially, you would observe a player colored in blue. You can use arrow keys to change it's position. 
+
+Press "F" to spawn four new bots around the player. These bots maintain the formation around the bot by moving around with it.
+
 * Add on action that creates a new Bot
 * Create 4 bots and have them keep a formation around the player.
 
 Advanced Tasks
 --------------------
+Follow the steps below to get the advanced agent to work : 
+* In GameEngine.java, uncomment lines 155 and 156  (Advanced ABL files). Save the file.
+```
+      AdvancedAgent advancedAgent = new AdvancedAgent();
+      advancedAgent.startBehaving();
+```
+* Run AgentCompiler.java.
+* Refresh the abl.generated folder.
+* Run GameEngine.java.
+
+Our advanced agent has following characteristics : 
+* All the bots generated in the game are angry at the player and maintain a certain distance at all times. 
+* If the player approaches a bot and manages to come closer to the bot, it turns into red color (signigying anger).
+* If the player is very close to the bot, it transforms from a small red bot to a large red bot. 
+
+Initially, you would observe a player colored in blue. You can use arrow keys to change it's position. 
+
+Press "F" to spawn four new bots around the player. These bots will follow the characteristics as mentioned above. User can always press "F" at any point in the game to create four new bots. 
+
+
 Design and create a multi-bot social interaction that communicates to the player via movement and bot color. The player should be able to interact with your multi-bot behavior set through movement, shooting, or some other user interaction that you design.
 
-Here are some spaces you can design multi-bot social interactions for but feel free to create your own:
-* loneliness - how would the bots make the player feel lonely?
-* factions - split the bots into two factions and put the player in the middle.
-* stigma - if the character or a bot had a stigma (i.e. an extremely undesirable social quality), how would the bots react? If a bot or player interacted with the stigmatized character, how should the others react?
-* building trust - The player starts as not being trusted by the bots. How would they gain their trust and how would the bots performance change?
-
-Group Work Policy
---------------------
-You may work in teams of up to 4 people.
-
-Grading
---------------------
-This assigment will be graded on a 100 point scale.
-* 30 Starter Tasks
-* 30 Intermediate Tasks
-* 40 Advanced Tasks
-
-Turn-in
---------------------
-Push your code to your group's GitHub Classroom repository. The master branch will be graded.
-
-
-Questions and Answers
---------------------
-*Question:* How do I build and run the project?
-
-*Answer:* The process runs in two steps: 1) compile the .abl code into .java classes and 2) run the GameEngine with the newly-generated code. To help you with this, there are two classes that have a entry point for execution (i.e. they have a '''static void main(String args[])''' function declared):
-1. **abl.build.AgentCompiler.java** - This class invokes the compile in abl.jar to transcompile .abl code into .java code.
-2. **game.GameEngine.java** - This launches the game. The code for your abl agent must be transpiled by abl.jar before you can run this class.
-
-*Question:* I have changed my code and recompiled the project but the change isn't seen when I run the GameEngine class. What do I do?
-
-*Answer:* Periodically, Java doesn't recognize that the .java files generated by abl have change and fails to update the .class files. Run Project->Clean... on the project and try again.
-
-*Question:* There is an debugger window that opens and my bots aren't moving. What's is happening?
-
-*Answer:* You have the debug variable set to true in AgentCompiler.java. This tells ABL to run your agent in debug mode which opens the debugger window and automatically pauses your agent before its first decision cycle. Press the **Continue** button to proceed.
-
-[Screenshot of the ABL debugger](misc/ABLdebugger.png)
