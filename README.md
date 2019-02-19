@@ -91,3 +91,27 @@ Press "F" to spawn four new bots around the player. These bots will follow the c
 
 Design and create a multi-bot social interaction that communicates to the player via movement and bot color. The player should be able to interact with your multi-bot behavior set through movement, shooting, or some other user interaction that you design.
 
+### Additional Work ###
+We improved our advanced agent by integrating happy and angry mode for the agent.
+
+Follow the steps below to get the super advanced agent to work : 
+* In GameEngine.java, uncomment lines 20, 160 and 161  (Advanced ABL files). Save the file.
+```
+      import abl.generated.SuperAdvanced;
+      
+      AdvancedAgent advancedAgent = new AdvancedAgent();
+      advancedAgent.startBehaving();
+```
+* Run AgentCompiler.java.
+* Refresh the abl.generated folder.
+* Run GameEngine.java.
+
+In this part agent has the following characteristics : 
+* The agent at the beginning of the game is happy and therefore all the bots around it are happy and follow the player to each direction
+* If the player gets angry all of the bots would react accordingly and start shooting at the player and ran away from it and if the player gets close to them they get red and bigger. (Similar to the behavior of the Advanced Agent)
+* If the player gets happy the bots would surround the player again.
+
+Initially, The player is happy and all the bots are following the player to each direction.
+
+Press "a" would activate the angry mode in the player and the bots start scaping away from the player and shooting at it. If the player gets close to any of them they would get red and bigger. By pressing "h" happy mode would get activated again and all the bots would come back and surround the player again. 
+
