@@ -12,10 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import abl.generated.ChaserAgent;
+//import abl.generated.ChaserAgent;
 import abl.generated.StarterAgent;
-import abl.generated.StarteAgent_2;
-import abl.generated.IntermediateAgent;
+//import abl.generated.StarteAgent_2;
+//import abl.generated.IntermediateAgent;
 import abl.generated.AdvancedAgent;
 //import abl.generated.SuperAdvanced;
 import game.input.*;
@@ -86,7 +86,7 @@ public class GameEngine extends JPanel implements KeyListener {
 
 	/** holds the input classes */
 	private ArrayList<IInput> inputs = new ArrayList<IInput>();
-	
+	public boolean angry = false;
 	/**
 	 * Starts the game.
 	 */
@@ -149,16 +149,16 @@ public class GameEngine extends JPanel implements KeyListener {
 	public void startAgent() {
 		 //ChaserAgent agent = new ChaserAgent();
 		 //agent.startBehaving();
-		 StarterAgent starterAgent = new StarterAgent();
-		 starterAgent.startBehaving();
+//		 StarterAgent starterAgent = new StarterAgent();
+//		 starterAgent.startBehaving();
 //		 StarteAgent_2 starteAgent_2 = new StarteAgent_2();
 //		 starteAgent_2.startBehaving();
 //		 IntermediateAgent intermediateAgent = new IntermediateAgent();
 //		 intermediateAgent.startBehaving();
 //		 AdvancedAgent advancedAgent = new AdvancedAgent();
 //		 advancedAgent.startBehaving();
-//		 SuperAdvanced superAdvanced = new SuperAdvanced();
-		 //superAdvanced.startBehaving();
+		 SuperAdvanced superAdvanced = new SuperAdvanced();
+		 superAdvanced.startBehaving();
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class GameEngine extends JPanel implements KeyListener {
 		updateLocations();
 		updateBullets();
 		updateBots();
-	
+		updateEmotion();
 		super.paint(g);
 
 		g.setColor(Color.BLUE);
@@ -278,6 +278,21 @@ public class GameEngine extends JPanel implements KeyListener {
 		}
 	}
 	
+	
+	public void updateEmotion() {
+		if (keyPresses[KeyEvent.VK_A]) {
+			angry =true ;
+			
+		}
+		
+		if (keyPresses[KeyEvent.VK_H]) {
+			angry =false ;
+			
+		}
+			
+	}
+	
+	
 	/**
 	 * Updates the positions of objects in the scene based on their trajectories and the dimensions of the scene.
 	 */
@@ -377,6 +392,9 @@ public class GameEngine extends JPanel implements KeyListener {
 	
 	public ArrayList<Bot> getBots() {
 		return bots;
+	}
+	public boolean getPlayerEmotion() {
+		return angry;
 	}
 	
 	/**
