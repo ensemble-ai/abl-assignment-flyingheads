@@ -113,5 +113,5 @@ In this part agent has the following characteristics :
 
 Initially, The player is happy and all the bots are following the player to each direction.
 
-Press "a" would activate the angry mode in the player and the bots start scaping away from the player and shooting at it. If the player gets close to any of them they would get red and bigger. By pressing "h" happy mode would get activated again and all the bots would come back and surround the player again. 
+First, press "f" to create new bots then pressing "a" would activate the angry mode in the player and the bots start scaping away from the player and shooting at it. If the player gets close to any of them they would get red and bigger. By pressing "h" happy mode would get activated again and all the bots would come back and surround the player again. 
 
