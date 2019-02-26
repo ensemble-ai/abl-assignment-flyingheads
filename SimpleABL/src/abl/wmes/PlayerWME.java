@@ -21,12 +21,15 @@ public class PlayerWME extends WME {
 	/** Trajectory of the player */
 	private Point trajactory;
 	
+	private boolean emotion;
+	
 	/**
 	 * Instantiates a working memory element for tracking the player character.
 	 */
-	public PlayerWME(Point location, Point trajectory) {
+	public PlayerWME(Point location, Point trajectory, boolean emotion) {
 		this.location = location;
 		this.trajactory = trajectory;
+		this.emotion = emotion;
 	}
 	
 	/**
@@ -55,5 +58,9 @@ public class PlayerWME extends WME {
 	 */
 	public int getTrajectoryY() {
 		return trajactory.y;
+	}
+	
+	public boolean getEmotion() {
+		return emotion;
 	}
 }
